@@ -13,7 +13,7 @@
                     <h3>Pagina de Inscripcion de Alumnos</h3>
                     <h1>Mejorando la experiencia de Inscripciones!</h1>
                     <form action="" class="online-form col-md-offset-3 col-md-6 col-sm-12">
-                        <button type="submit" class="form-control">Ir</button>
+                        <button type="submit" class="form-control"> @Html.ActionLink("Ir", "About", "Home") </button>
                     </form>
                 </div>
             </div>
@@ -162,8 +162,10 @@
                     <div class="col-md-4 col-sm-4">
 
                     </div>
-                    <div class="col-md-4 col-sm-4">
-                        <input type="submit" class="form-control" asp-action="home/about" name="send message" value="Contactenos">
+                    <div class="pricing-bottom col-md-3 col-sm-3">
+
+                        <button type="submit" class="section-btn pricing-btn" name="send message" value=" Contactenos">  @Html.ActionLink("Contactenos", "Contact", "Home")</button>
+                                           
                     </div>
                     <div class="col-md-4 col-sm-4">
 
