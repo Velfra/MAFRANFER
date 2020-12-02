@@ -13,10 +13,10 @@ namespace MAFRANFER.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class cursos_onlineEntities : DbContext
+    public partial class cursos_onlineEntities2 : DbContext
     {
-        public cursos_onlineEntities()
-            : base("name=cursos_onlineEntities")
+        public cursos_onlineEntities2()
+            : base("name=cursos_onlineEntities2")
         {
         }
     
@@ -28,6 +28,7 @@ namespace MAFRANFER.Models
         public virtual DbSet<curso> curso { get; set; }
         public virtual DbSet<inscripcion> inscripcion { get; set; }
         public virtual DbSet<inscripcion_detalle> inscripcion_detalle { get; set; }
+        public virtual DbSet<contacto> contacto { get; set; }
         public virtual DbSet<estudiante> estudiante { get; set; }
         public virtual DbSet<profesor> profesor { get; set; }
     }
