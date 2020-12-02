@@ -13,10 +13,10 @@ namespace MAFRANFER.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class cursos_onlineEntities2 : DbContext
+    public partial class cursos_onlineEntities : DbContext
     {
-        public cursos_onlineEntities2()
-            : base("name=cursos_onlineEntities2")
+        public cursos_onlineEntities()
+            : base("name=cursos_onlineEntities")
         {
         }
     

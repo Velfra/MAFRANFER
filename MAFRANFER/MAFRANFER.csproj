@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\contactosController.cs" />
     <Compile Include="Controllers\estudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -299,6 +300,9 @@
     <Content Include="Views\estudiantes\Details.cshtml" />
     <Content Include="Views\estudiantes\Edit.cshtml" />
     <Content Include="Views\estudiantes\Index.cshtml" />
+    <Content Include="Views\contactos\Create.cshtml" />
+    <Content Include="Views\contactos\Details.cshtml" />
+    <Content Include="Views\contactos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
