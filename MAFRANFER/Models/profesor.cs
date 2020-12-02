@@ -14,7 +14,7 @@ namespace MAFRANFER.Models
     
     public partial class profesor
     {
-        public int estudiante_id { get; set; }
+        public int profesor_id { get; set; }
         public string nro_documento { get; set; }
         public string tipo_documento { get; set; }
         public string nombre { get; set; }

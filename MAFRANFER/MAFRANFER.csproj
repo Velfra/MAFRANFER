@@ -295,14 +295,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\contactos\Create.cshtml" />
+    <Content Include="Views\contactos\Index.cshtml" />
     <Content Include="Views\estudiantes\Create.cshtml" />
     <Content Include="Views\estudiantes\Delete.cshtml" />
     <Content Include="Views\estudiantes\Details.cshtml" />
     <Content Include="Views\estudiantes\Edit.cshtml" />
     <Content Include="Views\estudiantes\Index.cshtml" />
-    <Content Include="Views\contactos\Create.cshtml" />
-    <Content Include="Views\contactos\Details.cshtml" />
-    <Content Include="Views\contactos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

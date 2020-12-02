@@ -12,6 +12,18 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.nro_documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_documento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.direccion)
         </th>
         <th>
@@ -23,11 +35,29 @@
         <th>
             @Html.DisplayNameFor(model => model.email)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_nacimiento)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nro_documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_documento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.direccion)
         </td>
@@ -41,9 +71,15 @@
             @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.DisplayFor(modelItem => item.sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_nacimiento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.estudiante_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.estudiante_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.estudiante_id })
         </td>
     </tr>
 }

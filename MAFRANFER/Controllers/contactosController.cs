@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using MAFRANFER.Models;
 
 namespace MAFRANFER.Controllers
@@ -52,10 +53,13 @@ namespace MAFRANFER.Controllers
             {
                 db.contacto.Add(contacto);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+
+                return RedirectToAction("index", "home");
             }
 
-            return View(contacto);
+            return RedirectToAction("index","home");
         }
 
         // GET: contactos/Edit/5
