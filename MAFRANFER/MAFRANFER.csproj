@@ -179,6 +179,7 @@
     <Compile Include="Controllers\contactosController.cs" />
     <Compile Include="Controllers\estudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\inscripcionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -302,6 +303,11 @@
     <Content Include="Views\estudiantes\Details.cshtml" />
     <Content Include="Views\estudiantes\Edit.cshtml" />
     <Content Include="Views\estudiantes\Index.cshtml" />
+    <Content Include="Views\inscripciones\Create.cshtml" />
+    <Content Include="Views\inscripciones\Delete.cshtml" />
+    <Content Include="Views\inscripciones\Details.cshtml" />
+    <Content Include="Views\inscripciones\Edit.cshtml" />
+    <Content Include="Views\inscripciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

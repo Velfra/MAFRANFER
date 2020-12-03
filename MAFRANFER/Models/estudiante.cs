@@ -11,19 +11,33 @@ namespace MAFRANFER.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class estudiante
     {
+        [DisplayName("Id Estudiante")]
         public int estudiante_id { get; set; }
+        [DisplayName("Documento")]
         public string nro_documento { get; set; }
+        [DisplayName("Tipo Documento")]
         public string tipo_documento { get; set; }
+        [DisplayName("Nombre")]
         public string nombre { get; set; }
+        [DisplayName("Apellido")]
         public string apellido { get; set; }
+        [DisplayName("Direccion")]
         public string direccion { get; set; }
+        [DisplayName("Celular")]
         public string celular { get; set; }
+        [DisplayName("Telefono")]
         public string telefono { get; set; }
+        [DisplayName("Email")]
         public string email { get; set; }
+        [DisplayName("Sexo")]
         public string sexo { get; set; }
+        [DisplayName("Fecha Nacimiento")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime fecha_nacimiento { get; set; }
     }
 }
