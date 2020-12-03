@@ -12,20 +12,11 @@ namespace MAFRANFER_API.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class profesor
+    public partial class contacto
     {
-        public int profesor_id { get; set; }
-        public string nro_documento { get; set; }
-        public string tipo_documento { get; set; }
+        public int contacto_id { get; set; }
         public string nombre { get; set; }
-        public string apellido { get; set; }
-        public string direccion { get; set; }
-        public string celular { get; set; }
-        public string telefono { get; set; }
         public string email { get; set; }
-        public string sexo { get; set; }
-        public System.DateTime fecha_nacimiento { get; set; }
-        public string titulo { get; set; }
-        public string observacion { get; set; }
+        public string mensaje { get; set; }
     }
 }

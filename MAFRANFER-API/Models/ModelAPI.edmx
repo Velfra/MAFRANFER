@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="cursos_onlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="contacto">
+          <Key>
+            <PropertyRef Name="contacto_id" />
+          </Key>
+          <Property Name="contacto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="mensaje" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="curso">
           <Key>
             <PropertyRef Name="curso_id" />
@@ -18,17 +27,9 @@
           <Property Name="profesor_id" Type="int" Nullable="false" />
           <Property Name="estado" Type="char" MaxLength="10" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'cursos_online.dbo.estudiante' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="estudiante">
           <Key>
             <PropertyRef Name="estudiante_id" />
-            <PropertyRef Name="nro_documento" />
-            <PropertyRef Name="tipo_documento" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="apellido" />
-            <PropertyRef Name="sexo" />
-            <PropertyRef Name="fecha_nacimiento" />
           </Key>
           <Property Name="estudiante_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nro_documento" Type="varchar" MaxLength="50" Nullable="false" />
@@ -63,21 +64,11 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.estudiante' no tiene defin
           <Property Name="precio" Type="money" Nullable="false" />
           <Property Name="subtotal" Type="money" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="profesor">
           <Key>
-            <PropertyRef Name="estudiante_id" />
-            <PropertyRef Name="nro_documento" />
-            <PropertyRef Name="tipo_documento" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="apellido" />
-            <PropertyRef Name="sexo" />
-            <PropertyRef Name="fecha_nacimiento" />
-            <PropertyRef Name="titulo" />
-            <PropertyRef Name="observacion" />
+            <PropertyRef Name="profesor_id" />
           </Key>
-          <Property Name="estudiante_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profesor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nro_documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tipo_documento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="250" Nullable="false" />
@@ -92,47 +83,27 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
           <Property Name="observacion" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityContainer Name="cursos_onlineModelStoreContainer">
+          <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="curso" EntityType="Self.curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inscripcion" EntityType="Self.inscripcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inscripcion_detalle" EntityType="Self.inscripcion_detalle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="estudiante" EntityType="Self.estudiante" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [estudiante].[estudiante_id] AS [estudiante_id], 
-    [estudiante].[nro_documento] AS [nro_documento], 
-    [estudiante].[tipo_documento] AS [tipo_documento], 
-    [estudiante].[nombre] AS [nombre], 
-    [estudiante].[apellido] AS [apellido], 
-    [estudiante].[direccion] AS [direccion], 
-    [estudiante].[celular] AS [celular], 
-    [estudiante].[telefono] AS [telefono], 
-    [estudiante].[email] AS [email], 
-    [estudiante].[sexo] AS [sexo], 
-    [estudiante].[fecha_nacimiento] AS [fecha_nacimiento]
-    FROM [dbo].[estudiante] AS [estudiante]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="profesor" EntityType="Self.profesor" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [profesor].[estudiante_id] AS [estudiante_id], 
-    [profesor].[nro_documento] AS [nro_documento], 
-    [profesor].[tipo_documento] AS [tipo_documento], 
-    [profesor].[nombre] AS [nombre], 
-    [profesor].[apellido] AS [apellido], 
-    [profesor].[direccion] AS [direccion], 
-    [profesor].[celular] AS [celular], 
-    [profesor].[telefono] AS [telefono], 
-    [profesor].[email] AS [email], 
-    [profesor].[sexo] AS [sexo], 
-    [profesor].[fecha_nacimiento] AS [fecha_nacimiento], 
-    [profesor].[titulo] AS [titulo], 
-    [profesor].[observacion] AS [observacion]
-    FROM [dbo].[profesor] AS [profesor]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="profesor" EntityType="Self.profesor" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cursos_onlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="contacto">
+          <Key>
+            <PropertyRef Name="contacto_id" />
+          </Key>
+          <Property Name="contacto_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mensaje" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="curso">
           <Key>
             <PropertyRef Name="curso_id" />
@@ -145,6 +116,22 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
           <Property Name="precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="profesor_id" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="estudiante">
+          <Key>
+            <PropertyRef Name="estudiante_id" />
+          </Key>
+          <Property Name="estudiante_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nro_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="inscripcion">
           <Key>
@@ -167,41 +154,11 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
           <Property Name="precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="subtotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
         </EntityType>
-        <EntityType Name="estudiante">
-          <Key>
-            <PropertyRef Name="estudiante_id" />
-            <PropertyRef Name="nro_documento" />
-            <PropertyRef Name="tipo_documento" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="apellido" />
-            <PropertyRef Name="sexo" />
-            <PropertyRef Name="fecha_nacimiento" />
-          </Key>
-          <Property Name="estudiante_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nro_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tipo_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="apellido" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="direccion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="profesor">
           <Key>
-            <PropertyRef Name="estudiante_id" />
-            <PropertyRef Name="nro_documento" />
-            <PropertyRef Name="tipo_documento" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="apellido" />
-            <PropertyRef Name="sexo" />
-            <PropertyRef Name="fecha_nacimiento" />
-            <PropertyRef Name="titulo" />
-            <PropertyRef Name="observacion" />
+            <PropertyRef Name="profesor_id" />
           </Key>
-          <Property Name="estudiante_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profesor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nro_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="tipo_documento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -215,11 +172,12 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
           <Property Name="titulo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="cursos_onlineEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="cursos_onlineEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="contacto" EntityType="Self.contacto" />
           <EntitySet Name="curso" EntityType="Self.curso" />
+          <EntitySet Name="estudiante" EntityType="Self.estudiante" />
           <EntitySet Name="inscripcion" EntityType="Self.inscripcion" />
           <EntitySet Name="inscripcion_detalle" EntityType="Self.inscripcion_detalle" />
-          <EntitySet Name="estudiante" EntityType="Self.estudiante" />
           <EntitySet Name="profesor" EntityType="Self.profesor" />
         </EntityContainer>
       </Schema>
@@ -227,7 +185,17 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="cursos_onlineModelStoreContainer" CdmEntityContainer="cursos_onlineEntities1">
+        <EntityContainerMapping StorageEntityContainer="cursos_onlineModelStoreContainer" CdmEntityContainer="cursos_onlineEntities2">
+          <EntitySetMapping Name="contacto">
+            <EntityTypeMapping TypeName="cursos_onlineModel.contacto">
+              <MappingFragment StoreEntitySet="contacto">
+                <ScalarProperty Name="contacto_id" ColumnName="contacto_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mensaje" ColumnName="mensaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="curso">
             <EntityTypeMapping TypeName="cursos_onlineModel.curso">
               <MappingFragment StoreEntitySet="curso">
@@ -239,6 +207,23 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="profesor_id" ColumnName="profesor_id" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estudiante">
+            <EntityTypeMapping TypeName="cursos_onlineModel.estudiante">
+              <MappingFragment StoreEntitySet="estudiante">
+                <ScalarProperty Name="estudiante_id" ColumnName="estudiante_id" />
+                <ScalarProperty Name="nro_documento" ColumnName="nro_documento" />
+                <ScalarProperty Name="tipo_documento" ColumnName="tipo_documento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -265,27 +250,10 @@ advertencia 6002: La tabla o vista 'cursos_online.dbo.profesor' no tiene definid
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="estudiante">
-            <EntityTypeMapping TypeName="cursos_onlineModel.estudiante">
-              <MappingFragment StoreEntitySet="estudiante">
-                <ScalarProperty Name="estudiante_id" ColumnName="estudiante_id" />
-                <ScalarProperty Name="nro_documento" ColumnName="nro_documento" />
-                <ScalarProperty Name="tipo_documento" ColumnName="tipo_documento" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="apellido" ColumnName="apellido" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="sexo" ColumnName="sexo" />
-                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="profesor">
             <EntityTypeMapping TypeName="cursos_onlineModel.profesor">
               <MappingFragment StoreEntitySet="profesor">
-                <ScalarProperty Name="estudiante_id" ColumnName="estudiante_id" />
+                <ScalarProperty Name="profesor_id" ColumnName="profesor_id" />
                 <ScalarProperty Name="nro_documento" ColumnName="nro_documento" />
                 <ScalarProperty Name="tipo_documento" ColumnName="tipo_documento" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
