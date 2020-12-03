@@ -87,8 +87,8 @@
                             @Html.DisplayFor(modelItem => item.fecha_nacimiento)
                         </td>
                         <td>
-                            @Html.ActionLink("Editar", "Edit", new { id = item.estudiante_id }, new { onclick = "return confirmation();", @class = "btn btn-primary btn-xs" }) -
-                            @Html.ActionLink("Detalle", "Details", new { id = item.estudiante_id } , new { onclick = "return confirmation();", @class = "btn btn-warning btn-xs" }) -
+                            @Html.ActionLink("Editar", "Edit", new { id = item.estudiante_id }, new { onclick = "return confirmation();", @class = "btn btn-warning btn-xs" }) -
+                    
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.estudiante_id }, new { onclick = "return confirmation();", @class = "btn btn-danger btn-xs" })
                         </td>
                     </tr>

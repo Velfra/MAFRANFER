@@ -20,7 +20,7 @@ namespace MAFRANFER.Models
         [DisplayName("Nro Documento")]
         public int estudiante_id { get; set; }
         [DisplayName("Fecha Inscripcion")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> fecha { get; set; }
         [DisplayName("Importe")]
         public Nullable<decimal> importe { get; set; }

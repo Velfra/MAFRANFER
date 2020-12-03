@@ -1,62 +1,80 @@
 ﻿@model IEnumerable<MAFRANFER.Models.inscripcion>
 
-@{
-    ViewBag.Title = "Index";
-}
+<section class="table table-responsive ">
+    <div class="container-fluid">
 
-<h2>Index</h2>
+        <div class="row">
+            <div class="col-md-8 col-md-pull-2" style="align-items: center;"  >
+                <div class="col-md-10">
+                    <h1 class="text-center">Todos mis cursos</h1>
+                </div>
+                
+                <form action="" class="online-form col-md-pull-4 col-md-10 col-md-offset-1" >
+                    <button type="submit" class="form-control"> @Html.ActionLink("Inscribirse", "Create", "inscripciones") </button>
+                </form>
+            </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.importe)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.observacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.curso.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estudiante.nro_documento)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.importe)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.observacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.curso.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estudiante.nro_documento)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.inscripcion_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.inscripcion_id })
-        </td>
-    </tr>
-}
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class=" col-lg-12 col-md-12 " text-align="center">
 
-</table>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.importe)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.observacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.curso.descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estudiante.nro_documento)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.importe)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.observacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.curso.descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estudiante.nro_documento)
+                        </td>
+                        <td>
+                  
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.inscripcion_id }, new { onclick = "return confirmation();", @class = "btn btn-danger btn-xs" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+</section>
