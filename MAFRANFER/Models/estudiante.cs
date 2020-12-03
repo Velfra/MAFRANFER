@@ -16,9 +16,14 @@ namespace MAFRANFER.Models
 
     public partial class estudiante
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public estudiante()
+        {
+            this.inscripcion = new HashSet<inscripcion>();
+        }
         [DisplayName("Id Estudiante")]
         public int estudiante_id { get; set; }
-        [DisplayName("Documento")]
+        [DisplayName("Nro Documento")]
         public string nro_documento { get; set; }
         [DisplayName("Tipo Documento")]
         public string tipo_documento { get; set; }
@@ -39,5 +44,8 @@ namespace MAFRANFER.Models
         [DisplayName("Fecha Nacimiento")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime fecha_nacimiento { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<inscripcion> inscripcion { get; set; }
     }
 }

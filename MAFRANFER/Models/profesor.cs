@@ -14,6 +14,12 @@ namespace MAFRANFER.Models
     
     public partial class profesor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public profesor()
+        {
+            this.curso = new HashSet<curso>();
+        }
+    
         public int profesor_id { get; set; }
         public string nro_documento { get; set; }
         public string tipo_documento { get; set; }
@@ -27,5 +33,8 @@ namespace MAFRANFER.Models
         public System.DateTime fecha_nacimiento { get; set; }
         public string titulo { get; set; }
         public string observacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<curso> curso { get; set; }
     }
 }

@@ -53,16 +53,7 @@
           <Property Name="importe" Type="money" />
           <Property Name="estado" Type="char" MaxLength="10" />
           <Property Name="observacion" Type="varchar" MaxLength="250" Nullable="false" />
-        </EntityType>
-        <EntityType Name="inscripcion_detalle">
-          <Key>
-            <PropertyRef Name="inscripcion_det_id" />
-          </Key>
-          <Property Name="inscripcion_id" Type="int" Nullable="false" />
-          <Property Name="inscripcion_det_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="curso_id" Type="int" Nullable="false" />
-          <Property Name="precio" Type="money" Nullable="false" />
-          <Property Name="subtotal" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="profesor">
           <Key>
@@ -82,13 +73,60 @@
           <Property Name="titulo" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
+        <Association Name="fk_curso">
+          <End Role="curso" Type="Self.curso" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="curso_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="curso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_curso_profesor">
+          <End Role="profesor" Type="Self.profesor" Multiplicity="1" />
+          <End Role="curso" Type="Self.curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesor">
+              <PropertyRef Name="profesor_id" />
+            </Principal>
+            <Dependent Role="curso">
+              <PropertyRef Name="profesor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="estudiante_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="estudiante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cursos_onlineModelStoreContainer">
           <EntitySet Name="contacto" EntityType="Self.contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="curso" EntityType="Self.curso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="estudiante" EntityType="Self.estudiante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inscripcion" EntityType="Self.inscripcion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="inscripcion_detalle" EntityType="Self.inscripcion_detalle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="profesor" EntityType="Self.profesor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_curso" Association="Self.fk_curso">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curso_profesor" Association="Self.FK_curso_profesor">
+            <End Role="profesor" EntitySet="profesor" />
+            <End Role="curso" EntitySet="curso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_estudiante" Association="Self.fk_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -116,6 +154,8 @@
           <Property Name="precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="profesor_id" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.fk_curso" FromRole="curso" ToRole="inscripcion" />
+          <NavigationProperty Name="profesor" Relationship="Self.FK_curso_profesor" FromRole="curso" ToRole="profesor" />
         </EntityType>
         <EntityType Name="estudiante">
           <Key>
@@ -132,6 +172,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="inscripcion" Relationship="Self.fk_estudiante" FromRole="estudiante" ToRole="inscripcion" />
         </EntityType>
         <EntityType Name="inscripcion">
           <Key>
@@ -143,16 +184,9 @@
           <Property Name="importe" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="estado" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="inscripcion_detalle">
-          <Key>
-            <PropertyRef Name="inscripcion_det_id" />
-          </Key>
-          <Property Name="inscripcion_id" Type="Int32" Nullable="false" />
-          <Property Name="inscripcion_det_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="curso_id" Type="Int32" Nullable="false" />
-          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="subtotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="curso" Relationship="Self.fk_curso" FromRole="inscripcion" ToRole="curso" />
+          <NavigationProperty Name="estudiante" Relationship="Self.fk_estudiante" FromRole="inscripcion" ToRole="estudiante" />
         </EntityType>
         <EntityType Name="profesor">
           <Key>
@@ -171,21 +205,69 @@
           <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="titulo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="curso" Relationship="Self.FK_curso_profesor" FromRole="profesor" ToRole="curso" />
         </EntityType>
-        <EntityContainer Name="cursos_onlineEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="fk_curso">
+          <End Role="curso" Type="Self.curso" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="curso">
+              <PropertyRef Name="curso_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="curso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_curso_profesor">
+          <End Role="profesor" Type="Self.profesor" Multiplicity="1" />
+          <End Role="curso" Type="Self.curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="profesor">
+              <PropertyRef Name="profesor_id" />
+            </Principal>
+            <Dependent Role="curso">
+              <PropertyRef Name="profesor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_estudiante">
+          <End Role="estudiante" Type="Self.estudiante" Multiplicity="1" />
+          <End Role="inscripcion" Type="Self.inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estudiante">
+              <PropertyRef Name="estudiante_id" />
+            </Principal>
+            <Dependent Role="inscripcion">
+              <PropertyRef Name="estudiante_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cursos_onlineEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="contacto" EntityType="Self.contacto" />
           <EntitySet Name="curso" EntityType="Self.curso" />
           <EntitySet Name="estudiante" EntityType="Self.estudiante" />
           <EntitySet Name="inscripcion" EntityType="Self.inscripcion" />
-          <EntitySet Name="inscripcion_detalle" EntityType="Self.inscripcion_detalle" />
           <EntitySet Name="profesor" EntityType="Self.profesor" />
+          <AssociationSet Name="fk_curso" Association="Self.fk_curso">
+            <End Role="curso" EntitySet="curso" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_curso_profesor" Association="Self.FK_curso_profesor">
+            <End Role="profesor" EntitySet="profesor" />
+            <End Role="curso" EntitySet="curso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_estudiante" Association="Self.fk_estudiante">
+            <End Role="estudiante" EntitySet="estudiante" />
+            <End Role="inscripcion" EntitySet="inscripcion" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="cursos_onlineModelStoreContainer" CdmEntityContainer="cursos_onlineEntities1">
+        <EntityContainerMapping StorageEntityContainer="cursos_onlineModelStoreContainer" CdmEntityContainer="cursos_onlineEntities">
           <EntitySetMapping Name="contacto">
             <EntityTypeMapping TypeName="cursos_onlineModel.contacto">
               <MappingFragment StoreEntitySet="contacto">
@@ -236,17 +318,7 @@
                 <ScalarProperty Name="importe" ColumnName="importe" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="observacion" ColumnName="observacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="inscripcion_detalle">
-            <EntityTypeMapping TypeName="cursos_onlineModel.inscripcion_detalle">
-              <MappingFragment StoreEntitySet="inscripcion_detalle">
-                <ScalarProperty Name="inscripcion_id" ColumnName="inscripcion_id" />
-                <ScalarProperty Name="inscripcion_det_id" ColumnName="inscripcion_det_id" />
                 <ScalarProperty Name="curso_id" ColumnName="curso_id" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

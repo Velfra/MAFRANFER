@@ -29,7 +29,6 @@ namespace MAFRANFER.Models
         public virtual DbSet<curso> curso { get; set; }
         public virtual DbSet<estudiante> estudiante { get; set; }
         public virtual DbSet<inscripcion> inscripcion { get; set; }
-        public virtual DbSet<inscripcion_detalle> inscripcion_detalle { get; set; }
         public virtual DbSet<profesor> profesor { get; set; }
     }
 }

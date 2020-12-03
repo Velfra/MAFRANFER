@@ -17,7 +17,8 @@ namespace MAFRANFER.Controllers
         // GET: inscripciones
         public ActionResult Index()
         {
-            return View(db.inscripcion.ToList());
+            var inscripcion = db.inscripcion.Include(i => i.curso).Include(i => i.estudiante);
+            return View(inscripcion.ToList());
         }
 
         // GET: inscripciones/Details/5
@@ -38,6 +39,8 @@ namespace MAFRANFER.Controllers
         // GET: inscripciones/Create
         public ActionResult Create()
         {
+            ViewBag.curso_id = new SelectList(db.curso, "curso_id", "descripcion");
+            ViewBag.estudiante_id = new SelectList(db.estudiante, "estudiante_id", "nro_documento");
             return View();
         }
 
@@ -46,15 +49,24 @@ namespace MAFRANFER.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "inscripcion_id,estudiante_id,fecha,importe,estado,observacion")] inscripcion inscripcion)
+        public ActionResult Create([Bind(Include = "inscripcion_id,estudiante_id,fecha,importe,estado,observacion,curso_id")] inscripcion inscripcion)
         {
             if (ModelState.IsValid)
             {
                 db.inscripcion.Add(inscripcion);
+                inscripcion.fecha = DateTime.Now;
+                inscripcion.estado = "A";
+
+                decimal precio = (from c in db.curso
+                                         where c.curso_id == inscripcion.curso_id
+                                         select (decimal)c.precio).FirstOrDefault();
+                inscripcion.importe = precio;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.curso_id = new SelectList(db.curso, "curso_id", "descripcion", inscripcion.curso_id);
+            ViewBag.estudiante_id = new SelectList(db.estudiante, "estudiante_id", "nro_documento", inscripcion.estudiante_id);
             return View(inscripcion);
         }
 
@@ -70,6 +82,8 @@ namespace MAFRANFER.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.curso_id = new SelectList(db.curso, "curso_id", "descripcion", inscripcion.curso_id);
+            ViewBag.estudiante_id = new SelectList(db.estudiante, "estudiante_id", "nro_documento", inscripcion.estudiante_id);
             return View(inscripcion);
         }
 
@@ -78,7 +92,7 @@ namespace MAFRANFER.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "inscripcion_id,estudiante_id,fecha,importe,estado,observacion")] inscripcion inscripcion)
+        public ActionResult Edit([Bind(Include = "inscripcion_id,estudiante_id,fecha,importe,estado,observacion,curso_id")] inscripcion inscripcion)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +100,8 @@ namespace MAFRANFER.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.curso_id = new SelectList(db.curso, "curso_id", "descripcion", inscripcion.curso_id);
+            ViewBag.estudiante_id = new SelectList(db.estudiante, "estudiante_id", "nro_documento", inscripcion.estudiante_id);
             return View(inscripcion);
         }
 

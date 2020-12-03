@@ -4,64 +4,78 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<section id="contact" data-stellar-background-ratio="0.5">
+    <div class="container">
+        <div class="row">
+            @using (Html.BeginForm("Create", "inscripciones", FormMethod.Post, new { id = "contact-form", role = "form" }))
+            {
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>inscripcion</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.estudiante_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.estudiante_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.estudiante_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <form id="contact-form" role="form" action="" method="post">
+                        <div class="section-title">
+                            <h1>Incripciones a Cursos</h1>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.importe, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.importe, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.importe, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="col-md-4 col-sm-4 " style="margin-top:2% ;">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            @Html.DropDownList("estudiante_id", null, "Selecciona tu Documento", htmlAttributes: new { @class = "form-control", })
+                            @Html.ValidationMessageFor(model => model.estudiante_id, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.observacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.observacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.observacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                        <div class="col-md-4 col-sm-12 " style="margin-top:2% ;">
+
+                            @Html.DropDownList("curso_id", null, "Selecciona el Curso", htmlAttributes: new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.curso_id, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-4" style="margin-top:0.3%">
+                            @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { placeholder = "Fecha", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12" style="margin-top:2.5%">
+                            @Html.EditorFor(model => model.curso.precio, new { htmlAttributes = new { placeholder = "Importe", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.importe, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12" style="margin-top:-70px">
+                            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { placeholder = "Estado", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12" style="margin-top:-70PX ; margin-left:320px">
+                            @Html.EditorFor(model => model.observacion, new { htmlAttributes = new { placeholder = "Observacion", @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.observacion, "", new { @class = "text-danger" })
+
+                        </div>
+                    </form>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+                    <div class=" col-md-12 col-sm-4"> </div>
+                    <div class=" col-md-4 col-sm-4"> </div>
+
+                    <div class=" col-md-4 col-sm-4">
+                        <input type="submit" class="form-control tet" name="send message" value="Inscribirse" onclick="confirm('Todos los datos se encuentran correctos?'); ">
+                    </div>
+
+                </div>
+            }
         </div>
     </div>
-}
+</section>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
+

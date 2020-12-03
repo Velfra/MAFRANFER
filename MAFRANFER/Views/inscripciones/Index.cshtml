@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.estudiante_id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.fecha)
         </th>
         <th>
@@ -26,14 +23,17 @@
         <th>
             @Html.DisplayNameFor(model => model.observacion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.curso.descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estudiante.nro_documento)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.estudiante_id)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.fecha)
         </td>
@@ -47,7 +47,12 @@
             @Html.DisplayFor(modelItem => item.observacion)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.inscripcion_id }) |
+            @Html.DisplayFor(modelItem => item.curso.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estudiante.nro_documento)
+        </td>
+        <td>
             @Html.ActionLink("Details", "Details", new { id=item.inscripcion_id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.inscripcion_id })
         </td>

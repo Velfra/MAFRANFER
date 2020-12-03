@@ -4,13 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2a58c7d841044245b8c8f40a34f0fedd" Name="Diagram1">
-        <EntityTypeShape EntityType="cursos_onlineModel.contacto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursos_onlineModel.curso" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursos_onlineModel.estudiante" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursos_onlineModel.inscripcion" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursos_onlineModel.inscripcion_detalle" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cursos_onlineModel.profesor" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="a057b70798964684b7fdabc1e8dd14e4" Name="Diagram1">
+        <EntityTypeShape EntityType="cursos_onlineModel.contacto" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursos_onlineModel.curso" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursos_onlineModel.estudiante" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursos_onlineModel.inscripcion" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cursos_onlineModel.profesor" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="cursos_onlineModel.fk_curso" ManuallyRouted="false" />
+        <AssociationConnector Association="cursos_onlineModel.FK_curso_profesor" ManuallyRouted="false" />
+        <AssociationConnector Association="cursos_onlineModel.fk_estudiante" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
