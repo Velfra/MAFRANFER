@@ -13,10 +13,10 @@ namespace MAFRANFER_API.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class cursos_onlineEntities1 : DbContext
+    public partial class cursos_onlineEntities2 : DbContext
     {
-        public cursos_onlineEntities1()
-            : base("name=cursos_onlineEntities1")
+        public cursos_onlineEntities2()
+            : base("name=cursos_onlineEntities2")
         {
         }
     
@@ -25,10 +25,11 @@ namespace MAFRANFER_API.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<contacto> contacto { get; set; }
         public virtual DbSet<curso> curso { get; set; }
+        public virtual DbSet<estudiante> estudiante { get; set; }
         public virtual DbSet<inscripcion> inscripcion { get; set; }
         public virtual DbSet<inscripcion_detalle> inscripcion_detalle { get; set; }
-        public virtual DbSet<estudiante> estudiante { get; set; }
         public virtual DbSet<profesor> profesor { get; set; }
     }
 }
