@@ -42,8 +42,8 @@ namespace MAFRANFER.Models
         [DisplayName("Sexo")]
         public string sexo { get; set; }
         [DisplayName("Fecha Nacimiento")]
+        [Range(typeof(DateTime), "01/01/1990", "01/01/2004")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        [Range(typeof(DateTime),"01/01/1990", "01/01/2004")]
         public System.DateTime fecha_nacimiento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
