@@ -10,6 +10,7 @@ using MAFRANFER.Models;
 
 namespace MAFRANFER.Controllers
 {
+    [Authorize]
     public class inscripcionesController : Controller
     {
         private cursos_onlineEntities db = new cursos_onlineEntities();
