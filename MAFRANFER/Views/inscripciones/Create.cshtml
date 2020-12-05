@@ -19,35 +19,33 @@
                             <h1>Incripciones a Cursos</h1>
                         </div>
 
-                        <div class="col-md-4 col-sm-4 " style="margin-top:2% ;">
+                        <div class="col-md-4 col-sm-4 " style="margin-top:16px">
 
                             @Html.DropDownList("estudiante_id", null, "Selecciona tu Documento", htmlAttributes: new { @class = "form-control", })
                             @Html.ValidationMessageFor(model => model.estudiante_id, "", new { @class = "text-danger" })
 
                         </div>
 
-                        <div class="col-md-4 col-sm-12 " style="margin-top:2% ;">
+                        <div class="col-md-4 col-sm-12 " style="margin-top:16px">
 
                             @Html.DropDownList("curso_id", null, "Selecciona el Curso", htmlAttributes: new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.curso_id, "", new { @class = "text-danger" })
 
                         </div>
-                        <div class="col-md-4 col-sm-4" style="margin-top:0.3%">
+                        <div class="col-md-4 col-sm-4" >
                             @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { placeholder = "Fecha", @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
 
                         </div>
-                        <div class="col-md-4 col-sm-12" style="margin-top:2.5%">
-                            @Html.EditorFor(model => model.curso.precio, new { htmlAttributes = new { placeholder = "Importe", @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.importe, "", new { @class = "text-danger" })
+                        
+                        <div class="col-md-4 col-sm-12" style="margin-top:16px">
+                            @Html.DropDownListFor(model => model.estado, new[] { new SelectListItem() {Text = "Activo" }, new SelectListItem() {Text = "Cancelado"}
+        }, "Estado", new { @class = "form-control" })
 
-                        </div>
-                        <div class="col-md-4 col-sm-12" style="margin-top:-70px">
-                            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { placeholder = "Estado", @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
 
                         </div>
-                        <div class="col-md-4 col-sm-12" style="margin-top:-70PX ; margin-left:320px">
+                        <div class="col-md-4 col-sm-12" >
                             @Html.EditorFor(model => model.observacion, new { htmlAttributes = new { placeholder = "Observacion", @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.observacion, "", new { @class = "text-danger" })
 

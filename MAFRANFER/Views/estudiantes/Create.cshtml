@@ -1,8 +1,5 @@
 ﻿@model MAFRANFER.Models.estudiante
 
-
-
-
 <section id="contact" data-stellar-background-ratio="0.5">
     <div class="container">
         <div class="row">
@@ -12,77 +9,81 @@
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="col-md-offset-1 col-md-10 col-sm-12">
-                <form id="contact-form" role="form" action="" method="post">
-                    <div class="section-title">
-                        <h1>Registro de Alumnos nuevos</h1>
+                <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <form id="contact-form" role="form" action="" method="post">
+                        <div class="section-title">
+                            <h1>Registro de Alumnos nuevos</h1>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4">
+                            @Html.EditorFor(model => model.nro_documento, new { htmlAttributes = new { placeholder = "Nro Documento", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.nro_documento, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-4" style="margin-top:16px">
+                            @Html.DropDownListFor(model => model.tipo_documento, new[] { new SelectListItem() {Text = "CI" }, new SelectListItem() {Text = "DNI"}
+        }, "Tipo Documento", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.tipo_documento, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { placeholder = "Nombre", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { placeholder = "Apellido", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { placeholder = "Direccion", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.celular, new { htmlAttributes = new { placeholder = "Celular", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.celular, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { placeholder = "Telefono", @class = "form-control", required = false } })
+                            @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Email", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12" style="margin-top:16px">
+                           
+                            @Html.DropDownListFor(model => model.sexo, new[] { new SelectListItem() {Text = "M" }, new SelectListItem() {Text = "F"}
+        }, "Genero", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-md-4 col-sm-12" >
+                            @Html.EditorFor(model => model.fecha_nacimiento, new { htmlAttributes = new { placeholder = "Fecha Nacimiento", @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.fecha_nacimiento, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </form>
+
+                    <div class=" col-md-12 col-sm-4"> </div>
+                    <div class=" col-md-4 col-sm-4"> </div>
+
+                    <div class=" col-md-4 col-sm-4">
+                        <input type="submit" class="form-control tet" name="send message" value="Guardar Datos" onclick="confirm('¿Todos los datos se encuentran correctos?'); ">
                     </div>
 
-                    <div class="col-md-4 col-sm-4">
-                        @Html.EditorFor(model => model.nro_documento, new { htmlAttributes = new { placeholder = "Nro Documento", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.nro_documento, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-4">
-                        @Html.EditorFor(model => model.tipo_documento, new { htmlAttributes = new { placeholder = "Tipo Documento", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.tipo_documento, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { placeholder = "Nombre", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.apellido, new { htmlAttributes = new { placeholder = "Apellido", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.direccion, new { htmlAttributes = new { placeholder = "Direccion", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.celular, new { htmlAttributes = new { placeholder = "Celular", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.celular, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { placeholder = "Telefono", @class = "form-control", required = false } })
-                        @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { placeholder = "Email", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.sexo, new { htmlAttributes = new { placeholder = "Sexo", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.sexo, "", new { @class = "text-danger" })
-
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.fecha_nacimiento, new { htmlAttributes = new { placeholder = "Fecha Nacimiento", @class = "form-control", required = true } })
-                        @Html.ValidationMessageFor(model => model.fecha_nacimiento, "", new { @class = "text-danger" })
-
-                    </div>
-
-                </form>
-
-                <div class=" col-md-12 col-sm-4"> </div>
-                <div class=" col-md-4 col-sm-4"> </div>
-
-                <div class=" col-md-4 col-sm-4">
-                    <input type="submit" class="form-control tet" name="send message" value="Guardar Datos" onclick="confirm('¿Todos los datos se encuentran correctos?'); ">
                 </div>
-
-            </div>
             }
         </div>
     </div>
 </section>
+
 
 
 

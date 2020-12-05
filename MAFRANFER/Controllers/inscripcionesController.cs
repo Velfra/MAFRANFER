@@ -56,7 +56,6 @@ namespace MAFRANFER.Controllers
             {
                 db.inscripcion.Add(inscripcion);
                 inscripcion.fecha = DateTime.Now;
-                inscripcion.estado = "A";
 
                 decimal precio = (from c in db.curso
                                          where c.curso_id == inscripcion.curso_id
