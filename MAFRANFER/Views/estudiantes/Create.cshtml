@@ -49,7 +49,7 @@
 
                     </div>
                     <div class="col-md-4 col-sm-12">
-                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { placeholder = "Telefono", @class = "form-control", required = true } })
+                        @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { placeholder = "Telefono", @class = "form-control", required = false } })
                         @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
 
                     </div>
@@ -75,7 +75,7 @@
                 <div class=" col-md-4 col-sm-4"> </div>
 
                 <div class=" col-md-4 col-sm-4">
-                    <input type="submit" class="form-control tet" name="send message" value="Enviar Datos" onclick="confirm('Todos los datos se encuentran correctos?'); ">
+                    <input type="submit" class="form-control tet" name="send message" value="Guardar Datos" onclick="confirm('¿Todos los datos se encuentran correctos?'); ">
                 </div>
 
             </div>
